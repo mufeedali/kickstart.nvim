@@ -91,12 +91,15 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+
+-- 24-bit colors
+vim.opt.termguicolors = true
 
 -- Make line numbers default
 vim.opt.number = true
@@ -264,7 +267,62 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    'coffebar/transfer.nvim',
+    lazy = true,
+    cmd = { 'TransferInit', 'DiffRemote', 'TransferUpload', 'TransferDownload', 'TransferDirDiff', 'TransferRepeat' },
+    dependencies = {
+      {
+        'rcarriga/nvim-notify',
+      },
+    },
+    opts = {
+      upload_rsync_params = { -- a table of strings or functions
+        '-rlzi',
+        '--delete',
+        '--checksum',
+        '--exclude',
+        '__pycache__',
+        '--exclude',
+        '.git',
+        '--exclude',
+        '.idea',
+        '--exclude',
+        '.DS_Store',
+        '--exclude',
+        '.nvim',
+        '--exclude',
+        '*.pyc',
+        '--exclude',
+        'sym/',
+        '--exclude',
+        '.venv',
+        '--exclude',
+        '.ruff_cache',
+        '--exclude',
+        '.svn',
+        '--exclude',
+        '.vscode',
+      },
+    },
+  },
+  {
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
+      'MunifTanjim/nui.nvim',
+      {
+        '3rd/image.nvim',
+        opts = {},
+        build = false, -- do not build with hererocks
+        dependencies = {
+          'kiyoon/magick.nvim',
+        },
+      }, -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+  },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
   --
   -- This is often very useful to both group configuration, as well as handle
@@ -757,6 +815,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
+        python = { 'ruff' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -1019,6 +1078,8 @@ require('lazy').setup({
     },
   },
 })
+
+vim.notify = require 'notify'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
