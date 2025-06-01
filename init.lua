@@ -287,6 +287,20 @@ require('lazy').setup({
     },
   },
   {
+    'amitds1997/remote-nvim.nvim',
+    version = '*', -- Pin to GitHub releases
+    dependencies = {
+      'nvim-lua/plenary.nvim', -- For standard functions
+      'MunifTanjim/nui.nvim', -- To build the plugin UI
+      'nvim-telescope/telescope.nvim', -- For picking b/w different remote methods
+    },
+    config = true,
+  },
+  {
+    'numToStr/Comment.nvim',
+    opts = {},
+  },
+  {
     'coffebar/transfer.nvim',
     lazy = true,
     cmd = { 'TransferInit', 'DiffRemote', 'TransferUpload', 'TransferDownload', 'TransferDirDiff', 'TransferRepeat' },
@@ -323,23 +337,6 @@ require('lazy').setup({
         '--exclude',
         '.vscode',
       },
-    },
-  },
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons', -- not strictly required, but recommended
-      'MunifTanjim/nui.nvim',
-      {
-        '3rd/image.nvim',
-        opts = {},
-        build = false, -- do not build with hererocks
-        dependencies = {
-          'kiyoon/magick.nvim',
-        },
-      }, -- Optional image support in preview window: See `# Preview Mode` for more information
     },
   },
   -- NOTE: Plugins can also be configured to run Lua code when they are loaded.
