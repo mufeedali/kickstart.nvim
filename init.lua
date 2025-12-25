@@ -390,6 +390,7 @@ do
   --
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   vim.pack.add { gh 'rebelot/kanagawa.nvim' }
+  require('kanagawa').setup { theme = 'dragon' }
 
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
