@@ -365,7 +365,7 @@ do
     },
   }
 
-  vim.pack.add('github.com/rcarriga/nvim-notify')
+  vim.pack.add { gh 'rcarriga/nvim-notify'}
   vim.notify = require 'notify'
 
   -- Useful plugin to show you pending keybinds.
